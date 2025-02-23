@@ -1,33 +1,38 @@
-# Simple Simon Game
-A simple Simon game built using HTML, CSS, Javascript, and the jQuery library. The objective of the game is to repeat the sequence of colors shown by the computer, which becomes longer as the player progresses through the levels.
+# Memory Game
+A retro grid-based game in vanilla JavaScript, HTML and CSS
 
-## Getting Started
-These instructions will help you to run the game on your local machine.
+View the full walkthrough [here](https://www.youtube.com/channel/UC5DNytAJ6_FISueUfzZCVsw) 
 
-### Prerequisites
-A web browser that supports HTML, CSS, and Javascript.
+Memory Game, also known as the Concentration card game or Matching Game, is a simple card game where you need to match pairs by turn over 2 cards at a time. There are so many versions of it it is hard to in down it's exact origin. There are claims that the famuos writer of Huckleberry Finn, Mark Twain invented his own version. I googled it and whatever it is, it looks more like a way of trying to figure out how much tax you owe rather than match cards.
 
-### Installation
-1. Clone or download the repository.
-2. Open the index.html file in your web browser.
+In this repo, I will be putting extra focus on setting Attributes in JavaScript. If you want to learn how to use setAttritube and getAttribute effectively, please have a look at my code.
 
-### Gameplay
-1. The game starts with a sequence of colors being displayed by the computer.
-2. The player must then repeat the sequence by clicking the corresponding colored buttons.
-3. If the player successfully repeats the sequence, the computer will add another color to the sequence, and the player must repeat the new sequence.
-4. The game ends if the player makes a mistake or reaches the highest level.
-5. The game will Restart on Pressing any key on Keyboard.
-### Controls
-The game can be controlled using the mouse or the touch screen of your device.
+I have kept the styling at a bare miniumum for you to go wild and make it your own. Please tag me as I would LOVE to see your game!!!
 
-### Built With
-- HTML
-- CSS
-- Javascript
-- jQuery library
+## What inbuilt functions are we going to focus on?
+- for loops
+- addEventListener
+- setAttribute
+- getAttribute
+- data-name
+- document.querySelector
+- createElement
 
-### Author
-@Gaurav-Kumar-Soni
+## Rules of Memory Game
+- You will start by flipping over one card
+- If the next card you flip matches, a pop up alert notifies you and you get +1 to your score
+- These cards then disspear
+- If the next card you flip does not match, a pop up alert notifies you of ths and the cards flip back
+- The game continues until you match all the cards on the board
 
-### Acknowledgments
-- The game was inspired by the classic Simon game.
+### MIT Licence
+
+Copyright (c) 2020 Ania Kubow
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*Translation: Ofcourse you can use this for you project! Just make sure to say where you got this from :)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
