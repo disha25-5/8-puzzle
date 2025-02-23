@@ -1,203 +1,109 @@
+const wheel = document.getElementById("wheel");
+const spinBtn = document.getElementById("spin-btn");
+const finalValue = document.getElementById("final-value");
+const spinnerSound = new Audio('spinner.mp3')
 
-    function shuffle(array) {
-      let currentIndex = array.length,
-        randomIndex;
-      while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex],
-          array[currentIndex],
-        ];
-      }
-      return array;
+//Object that stores values of minimum and maximum angle for a value
+const rotationValues = [
+  { minDegree: 0, maxDegree: 30, value: 200 },
+  { minDegree: 31, maxDegree: 90, value: 100 },
+  { minDegree: 91, maxDegree: 150, value: 600 },
+  { minDegree: 151, maxDegree: 210, value: 500 },
+  { minDegree: 211, maxDegree: 270, value: 400 },
+  { minDegree: 271, maxDegree: 330, value: 300 },
+  // { minDegree: 331, maxDegree: 360, value: 200 },
+];
+//Size of each piece
+const data = [16, 16, 16, 16, 16, 16];
+//background color for each piece
+var pieColors = [
+  "red",
+  "green",
+  "blue",
+  "pink",
+  "orange",
+  "black",
+];
+//Create chart
+let myChart = new Chart(wheel, {
+  //Plugin for displaying text on pie chart
+  plugins: [ChartDataLabels],
+  //Chart Type Pie
+  type: "pie",
+  data: {
+    //Labels(values which are to be displayed on chart)
+    labels: [100, 200, 300, 400, 500, 600],
+    //Settings for dataset/pie
+    datasets: [
+      {
+        backgroundColor: pieColors,
+        data: data,
+      },
+    ],
+  },
+  options: {
+    //Responsive chart
+    responsive: true,
+    animation: { duration: 0 },
+    plugins: {
+      //hide tooltip and legend
+      tooltip: false,
+      legend: {
+        display: false,
+      },
+      //display labels inside pie chart
+      datalabels: {
+        color: "#ffffff",
+        formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+        font: { size: 44 },
+      },
+    },
+  },
+});
+//display value based on the randomAngle
+const valueGenerator = (angleValue) => {
+  for (let i of rotationValues) {
+    //if the angleValue is between min and max then display it
+    if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+      finalValue.innerHTML = `<p>Congrats You Wins : ${i.value} Rupees</p>`;
+      spinnerSound.pause()
+      spinBtn.disabled = false;
+      break;
     }
+  }
+};
 
-    var arr = [1, 2, 3, 4, 5, 6, 7, 8, null];
-    shuffle(arr);
-    console.log(arr);
-
-    document.getElementById("x1").innerHTML = arr[0];
-    document.getElementById("x2").innerHTML = arr[1];
-    document.getElementById("x3").innerHTML = arr[2];
-    document.getElementById("x4").innerHTML = arr[3];
-    document.getElementById("x5").innerHTML = arr[4];
-    document.getElementById("x6").innerHTML = arr[5];
-    document.getElementById("x7").innerHTML = arr[6];
-    document.getElementById("x8").innerHTML = arr[7];
-    document.getElementById("x9").innerHTML = arr[8];
-
-    var y1 = document.getElementById("x1").innerText;
-    var y2 = document.getElementById("x2").innerText;
-    var y3 = document.getElementById("x3").innerText;
-    var y4 = document.getElementById("x4").innerText;
-    var y5 = document.getElementById("x5").innerText;
-    var y6 = document.getElementById("x6").innerText;
-    var y7 = document.getElementById("x7").innerText;
-    var y8 = document.getElementById("x8").innerText;
-    var y9 = document.getElementById("x9").innerText;
-
-    function xyz1() {
-      if (y2 == "") {
-        [y1, y2] = [y2, y1];
-        document.getElementById("x1").innerText = y1;
-        document.getElementById("x2").innerText = y2;
-        console.log(y1, y2);
-      }
-      if (y4 == "") {
-        [y1, y4] = [y4, y1];
-        document.getElementById("x1").innerText = y1;
-        document.getElementById("x4").innerText = y4;
-        console.log(y1, y4);
-      }
+//Spinner count
+let count = 0;
+//100 rotations for animation and last rotation for result
+let resultValue = 101;
+//Start spinning
+spinBtn.addEventListener("click", () => {
+  spinBtn.disabled = true;
+  spinnerSound.play()
+  //Empty final value
+  finalValue.innerHTML = `<p>Good Luck!</p>`;
+  //Generate random degrees to stop at
+  let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+  //Interval for rotation animation
+  let rotationInterval = window.setInterval(() => {
+    //Set rotation for piechart
+    /*
+    Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
+    */
+    myChart.options.rotation = myChart.options.rotation + resultValue;
+    //Update chart with new value;
+    myChart.update();
+    //If rotation>360 reset it back to 0
+    if (myChart.options.rotation >= 360) {
+      count += 1;
+      resultValue -= 5;
+      myChart.options.rotation = 0;
+    } else if (count > 15 && myChart.options.rotation == randomDegree) {
+      valueGenerator(randomDegree);
+      clearInterval(rotationInterval);
+      count = 0;
+      resultValue = 101;
     }
-
-    function xyz2() {
-      if (y1 == "") {
-        [y1, y2] = [y2, y1];
-        document.getElementById("x1").innerText = y1;
-        document.getElementById("x2").innerText = y2;
-        console.log(y1, y2);
-      }
-      if (y3 == "") {
-        [y2, y3] = [y3, y2];
-        document.getElementById("x2").innerText = y2;
-        document.getElementById("x3").innerText = y3;
-        console.log(y1, y4);
-      }
-      if (y5 == "") {
-        [y2, y5] = [y5, y2];
-        document.getElementById("x2").innerText = y2;
-        document.getElementById("x5").innerText = y5;
-      }
-    }
-
-    function xyz3() {
-      if (y2 == "") {
-        [y3, y2] = [y2, y3];
-        document.getElementById("x3").innerText = y3;
-        document.getElementById("x2").innerText = y2;
-      }
-      if (y6 == "") {
-        [y3, y6] = [y6, y3];
-        document.getElementById("x3").innerText = y3;
-        document.getElementById("x6").innerText = y6;
-      }
-    }
-
-    function xyz4() {
-      if (y1 == "") {
-        [y1, y4] = [y4, y1];
-        document.getElementById("x1").innerText = y1;
-        document.getElementById("x4").innerText = y4;
-        console.log(y1, y2);
-      }
-      if (y5 == "") {
-        [y5, y4] = [y4, y5];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x4").innerText = y4;
-      }
-      if (y7 == "") {
-        [y7, y4] = [y4, y7];
-        document.getElementById("x7").innerText = y7;
-        document.getElementById("x4").innerText = y4;
-      }
-    }
-
-    function xyz5() {
-      if (y2 == "") {
-        [y5, y2] = [y2, y5];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x2").innerText = y2;
-      }
-      if (y4 == "") {
-        [y5, y4] = [y4, y5];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x4").innerText = y4;
-      }
-      if (y6 == "") {
-        [y5, y6] = [y6, y5];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x6").innerText = y6;
-      }
-      if (y8 == "") {
-        [y5, y8] = [y8, y5];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x8").innerText = y8;
-      }
-    }
-
-    function xyz6() {
-      if (y3 == "") {
-        [y6, y3] = [y3, y6];
-        document.getElementById("x3").innerText = y3;
-        document.getElementById("x6").innerText = y6;
-      }
-      if (y5 == "") {
-        [y6, y5] = [y5, y6];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x6").innerText = y6;
-      }
-      if (y9 == "") {
-        [y6, y9] = [y9, y6];
-        document.getElementById("x9").innerText = y9;
-        document.getElementById("x6").innerText = y6;
-      }
-    }
-
-    function xyz7() {
-      if (y4 == "") {
-        [y7, y4] = [y4, y7];
-        document.getElementById("x4").innerText = y4;
-        document.getElementById("x7").innerText = y7;
-      }
-      if (y8 == "") {
-        [y7, y8] = [y8, y7];
-        document.getElementById("x8").innerText = y8;
-        document.getElementById("x7").innerText = y7;
-      }
-    }
-
-    function xyz8() {
-      if (y7 == "") {
-        [y8, y7] = [y7, y8];
-        document.getElementById("x7").innerText = y7;
-        document.getElementById("x8").innerText = y8;
-      }
-      if (y5 == "") {
-        [y8, y5] = [y5, y8];
-        document.getElementById("x5").innerText = y5;
-        document.getElementById("x8").innerText = y8;
-      }
-      if (y9 == "") {
-        [y8, y9] = [y9, y8];
-        document.getElementById("x9").innerText = y9;
-        document.getElementById("x8").innerText = y8;
-      }
-    }
-
-    function xyz9() {
-      if (y8 == "") {
-        [y8, y9] = [y9, y8];
-        document.getElementById("x8").innerText = y8;
-        document.getElementById("x9").innerText = y9;
-      }
-      if (y6 == "") {
-        [y6, y9] = [y9, y6];
-        document.getElementById("x6").innerText = y6;
-        document.getElementById("x9").innerText = y9;
-      }
-    }
-    if (
-      x1 == "1" &&
-      x2 == "2" &&
-      x3 == "3" &&
-      x4 == "4" &&
-      x5 == "5" &&
-      x6 == "6" &&
-      x7 == "7" &&
-      x8 == "8" &&
-      x9 == ""
-    ) {
-      alert("Congrats You Win");
-    }
+  }, 10);
+});
