@@ -1,73 +1,53 @@
- * {
-    margin: 0;
-    padding: 0;
-  }
+body {
+  text-align: center;
+  background-color: #011F3F;
+}
 
-  html {
-    border: rgb(255, 153, 0) solid 4px;
-  }
+#level-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  margin:  5%;
+  color: #FEF2BF;
+}
 
-  body {
-    background-color: lightblue;
-  }
+.container {
+  display: block;
+  width: 50%;
+  margin: auto;
 
-  header {
-    font-family: "Bangers", cursive;
-    font-weight: bolder;
-    text-decoration: underline;
-    color: #a949f7b6;
-    height: 10vh;
-    margin-top: 20vh;
-    margin-bottom: 5vh;
-  }
+}
 
-  center {
-    font-size: 10vh;
-  }
+.btn {
+  margin: 25px;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border: 10px solid black;
+  border-radius: 20%;
+}
 
-  .container {
-    display: grid;
-    grid-template-columns: 15vh 15vh 15vh;
-    grid-template-rows: 15vh 15vh 15vh;
-    grid-gap: 0.3vw 0.3vw;
-    box-sizing: border-box;
-    justify-content: center;
-    margin-bottom: 20vh;
-  }
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
 
-  .box {
-    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
-    color: #ff1d58;
-    text-align: center;
-    padding: 50px 0;
-    font-size: xx-large;
-    font-family: "Comic Neue", cursive;
-    border: #8b4afc 2px solid;
-    border-radius: 15px;
-    cursor: pointer;
-  }
+.red {
+  background-color: red;
+}
 
-  .box:hover {
-    background-image: linear-gradient(-20deg, #a0f1e4 0%, #8ddad5 100%);
-    color: #b9082b;
-    border: 4px transparent;
-    border: #8b4afc 2px solid;
-    border-radius: 15px;
-    cursor: pointer;
-  }
+.green {
+  background-color: green;
+}
 
-  .box {
-    border: 2px solid #8b4afc;
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
-  }
+.blue {
+  background-color: blue;
+}
 
-  .box:hover {
-    transform: scale(1.1);
-  }
+.yellow {
+  background-color: yellow;
+}
 
-  header {
-    text-align: center;
-  }
+.pressed {
+  box-shadow: 0 0 20px white;
+  background-color: grey;
+}

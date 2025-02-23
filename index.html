@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simon</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>8 Puzzle</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@1,700&display=swap" rel="stylesheet" />
-</head>
+  <body>
+    <h1 id="level-title">Press A Key to Start</h1>
+    <div class="container">
+      <div class="row">
+        <div type="button" id="green" class="btn green"></div>
 
-<link rel="stylesheet" href="styles.css" />
-<body>
-  <header class="purples">
-    <h1>
-      <center>8 Puzzle</center>
-    </h1>
-  </header>
-  <br />
-  <div class="container">
-    <div class="box" id="x1" onclick="xyz1()"></div>
-    <div class="box" id="x2" onclick="xyz2()"></div>
-    <div class="box" id="x3" onclick="xyz3()"></div>
-    <div class="box" id="x4" onclick="xyz4()"></div>
-    <div class="box" id="x5" onclick="xyz5()"></div>
-    <div class="box" id="x6" onclick="xyz6()"></div>
-    <div class="box" id="x7" onclick="xyz7()"></div>
-    <div class="box" id="x8" onclick="xyz8()"></div>
-    <div class="box" id="x9" onclick="xyz9()"></div>
-  </div>
+        <div type="button" id="red" class="btn red"></div>
+      </div>
 
-<script src="script.js"></script>
-</body>
-
+      <div class="row">
+        <div type="button" id="yellow" class="btn yellow"></div>
+        <div type="button" id="blue" class="btn blue"></div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="game.js"></script>
+  </body>
 </html>
